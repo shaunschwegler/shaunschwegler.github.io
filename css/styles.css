@@ -11,7 +11,7 @@ html {
 body {
     min-height: 100%;
     background: #eee;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: 400;
     color: #222;
     font-size: 14px;
@@ -126,9 +126,6 @@ body {
 .details a:hover {
     text-decoration: underline;
     color: #000;
-}
-
-.skills {
 }
 
 .skills .skills__item {
