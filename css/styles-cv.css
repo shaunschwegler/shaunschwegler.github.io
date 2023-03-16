@@ -35,8 +35,9 @@ body {
 .header .full-name {
     font-size: 50px;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     text-align: right;
+    color: #4d17c9;
 }
 
 .header .first-name {
@@ -68,7 +69,9 @@ body {
     font-weight: bold;
     display: inline-block;
     margin-right: 10px;
-    text-decoration: underline;
+    background: -webkit-linear-gradient(#6537e4, #f10ba5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .details {
