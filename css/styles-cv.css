@@ -13,7 +13,7 @@ body {
     background: #eee;
     font-family: 'Open Sans', sans-serif;
     font-weight: 400;
-    color: #222;
+    color: #101247;
     font-size: 14px;
     line-height: 26px;
     padding-bottom: 50px;
@@ -23,7 +23,7 @@ body {
     max-width: 700px;
     background: #fff;
     margin: 50px auto 0;
-    box-shadow: 1px 1px 2px #DAD7D7;
+    box-shadow: 1px 1px 2px #c5c6e0;
     border-radius: 3px;
     padding: 40px;
 }
@@ -33,13 +33,14 @@ body {
 }
 
 .header .full-name {
-    font-size: 40px;
+    font-size: 50px;
     text-transform: uppercase;
     margin-bottom: 5px;
+    text-align: right;
 }
 
 .header .first-name {
-    font-weight: 700;
+    font-weight: 300;
 }
 
 .header .last-name {
@@ -59,7 +60,7 @@ body {
 .header .separator {
     height: 10px;
     display: inline-block;
-    border-left: 2px solid #999;
+    border-left: 2px solid #cecece;
     margin: 0 10px;
 }
 
