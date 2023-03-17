@@ -83,10 +83,10 @@ function onResize() {
 
 var mouse = new THREE.Vector2(0.8, 0.5);
 function onMouseMove(e) {
-    mouse.x = (e.clientX / window.innerWidth) - 1;
-    mouse.y = (e.clientY / window.innerHeight) - 1;
+    mouse.x = (e.clientX / window.innerWidth) - 1.5;
+    mouse.y = (e.clientY / window.innerHeight) - 1.5;
     TweenMax.to(dots.rotation, 4, {
-        x : (mouse.y * Math.PI * 1.2),
+        x : (mouse.y * Math.PI * 1.5),
         z : (mouse.x * Math.PI * 1.2),
         ease:Power1.easeOut
     });
@@ -97,5 +97,5 @@ window.addEventListener("mousemove", onMouseMove);
 var resizeTm;
 window.addEventListener("resize", function(){
     resizeTm = clearTimeout(resizeTm);
-    resizeTm = setTimeout(onResize, 100);
+    resizeTm = setTimeout(onResize, 200);
 });
