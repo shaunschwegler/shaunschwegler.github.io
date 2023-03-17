@@ -95,8 +95,8 @@
 					#define PI 3.1415926535897932384626433832795
 					attribute float size;
 					void main() {
-						vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
-						gl_PointSize = 3.0;
+						vec4 mvPosition = modelViewMatrix * vec4( position, 2.0 );
+						gl_PointSize = 5.0;
 						gl_Position = projectionMatrix * mvPosition;
 					}
 				</script>
@@ -105,7 +105,7 @@
 					void main(){
 						vec4 textureColor = texture2D( texture, gl_PointCoord );
 						if ( textureColor.a < 0.3 ) discard;
-						vec4 dotColor = vec4(0.06, 0.18, 0.36, 0.4);
+						vec4 dotColor = vec4(0.06, 0.28, 0.36, 0.4);
 						vec4 color = dotColor * textureColor;
 						gl_FragColor = color;
 					}
