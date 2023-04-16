@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/styles-workout-plan.css">
+    <script>
+        var highlightedCell = null;
+
+function highlightCell(cell) {
+    if (highlightedCell != null && highlightedCell != cell) {
+        highlightedCell.classList.remove("highlight");
+    }
+    cell.classList.add("highlight");
+    highlightedCell = cell;
+    event.stopPropagation();
+}
+
+function unhighlightAll() {
+    if (highlightedCell != null) {
+        highlightedCell.classList.remove("highlight");
+        highlightedCell = null;
+    }
+}
+    </script>
+</head>
+
+<body onclick="unhighlightAll()">
+    <h2>HTML Table</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th rowspan="2" onclick="highlightCell(this)">Header A</th>
+                <th colspan="3" onclick="highlightCell(this)">Header B</th>
+                <th colspan="2" onclick="highlightCell(this)">Header C</th>
+            </tr>
+            <tr>
+                <th onclick="highlightCell(this)">Subheader 1</th>
+                <th onclick="highlightCell(this)">Subheader 2</th>
+                <th onclick="highlightCell(this)">Subheader 3</th>
+                <th onclick="highlightCell(this)">Subheader 4</th>
+                <th onclick="highlightCell(this)">Subheader 5</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th onclick="highlightCell(this)">1</th>
+                <td onclick="highlightCell(this)">Data 1</td>
+                <td onclick="highlightCell(this)">Data 2</td>
+                <td onclick="highlightCell(this)">Data 3</td>
+                <td onclick="highlightCell(this)">Data 4</td>
+                <td onclick="highlightCell(this)">Data 5</td>
+            </tr>
+            <tr>
+                <th onclick="highlightCell(this)">2</th>
+                <td onclick="highlightCell(this)">Data 6</td>
+                <td onclick="highlightCell(this)">Data 7</td>
+                <td onclick="highlightCell(this)">Data 8</td>
+                <td onclick="highlightCell(this)">Data 9</td>
+                <td onclick="highlightCell(this)">Data 10</td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
