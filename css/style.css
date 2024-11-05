@@ -1,0 +1,292 @@
+/* Import the menu CSS */
+@import url('menu.css'); /* Adjust the path if necessary */
+
+/* Reset box-sizing for all elements */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* General Styles */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+/* Main Content Styles */
+.main-content {
+    max-width: 800px;
+    margin: 100px auto 20px auto; /* Adjusted for fixed menu */
+    padding: 0 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+/* Introduction Section Styles */
+.intro-section {
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.profile-pic {
+    width: 150px;
+    height: auto;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.intro-text {
+    flex: 1;
+}
+
+.intro-text p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.intro-text b {
+    font-weight: bold;
+}
+
+.gradient-text {
+    background: linear-gradient(to bottom, purple, pink);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+.pronunciation {
+    color: grey;
+}
+
+.intro-text a {
+    color: #0073e6;
+    text-decoration: underline;
+}
+
+.intro-text a:hover {
+    text-decoration: underline;
+}
+
+.intro-text ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.intro-text li {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-left: 20px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.intro-text li::before {
+    content: "-";
+    position: absolute;
+    left: -20px;
+    color: #333;
+}
+
+/* Experience and Certifications Section Styles */
+.experience,
+.certifications {
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.experience h2,
+.certifications h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.experience-item,
+.certifications-item {
+    margin-bottom: 30px;
+}
+
+.experience-columns,
+.education-columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -10px;
+}
+
+.left-column,
+.right-column {
+    width: calc(50% - 20px);
+    padding: 0 10px;
+}
+
+.right-column {
+    text-align: right;
+}
+
+.left-column p,
+.right-column p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+    margin: 5px 0;
+}
+
+.skills {
+    margin: 10px 0;
+}
+
+.skill-block {
+    display: inline-block;
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 5px 5px 0 0;
+    font-size: 13px;
+}
+
+/* Media Gallery Styles */
+.photo-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.photo-item img {
+    width: 150px; /* Adjust size as needed */
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.photo-item img:hover {
+    transform: scale(1.1);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+}
+
+.modal-image,
+.modal-video {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Footer Styles */
+footer {
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 10px;
+    text-align: right;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .intro-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-pic {
+        margin: 0 0 20px 0;
+    }
+
+    .intro-text {
+        text-align: left;
+    }
+
+    .experience-columns,
+    .education-columns {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .left-column,
+    .right-column {
+        width: 100%;
+        padding: 0;
+    }
+
+    .right-column {
+        text-align: left;
+        margin-top: 20px;
+    }
+
+    /* Modal Content on Mobile */
+    .modal-content {
+        width: 90%;
+        margin: 20% auto;
+    }
+}
+
+/* Link Styles within Experience and Certifications */
+.experience .left-column b a,
+.experience .right-column b a,
+.certifications .left-column b a,
+.certifications .right-column b a {
+    font-weight: bold;
+    color: blue;
+    text-decoration: underline;
+}
+
+.experience .left-column b a:hover,
+.experience .right-column b a:hover,
+.certifications .left-column b a:hover,
+.certifications .right-column b a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

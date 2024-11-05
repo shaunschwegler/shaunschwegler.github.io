@@ -1,0 +1,149 @@
+/* Reset default styles */
+body, ul, li, h1, h2, h3, p, a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Hide the checkbox globally */
+#toggle-menu {
+    display: none;
+}
+
+/* Menu styles */
+.menu {
+    position: fixed; /* Make the menu fixed */
+    top: 10px; /* 10px from the top */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center alignment */
+    background-color: #333333bb;
+    border-radius: 5px; /* Slight rounding */
+    padding: 10px 20px; /* Padding for inner content */
+    z-index: 1000; /* Ensure it stays on top */
+    /* Removed box-shadow */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */ /* Removed shadow */
+    width: calc(100% - 40px); /* Responsive width with 20px margin on each side */
+    max-width: 800px; /* Match main-content max-width */
+}
+
+.menu-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-left, .menu-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-left a, .menu-right a {
+    color: white;
+    margin-right: 15px;
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 3px; /* Optional: Slight rounding on hover background */
+}
+
+.menu-right a {
+    margin-right: 0;
+    margin-left: 15px;
+    padding: 0;
+}
+
+.menu-left a:hover {
+    background-color: #555;
+    border-radius: 5px;
+}
+
+.menu-right a:hover i {
+    color: #ccc;
+}
+
+.menu-right a:hover {
+    background-color: transparent;
+}
+
+.icon-link i {
+    font-size: 20px;
+    color: white;
+}
+
+/* Burger Icon and Mobile Menu Hidden by Default */
+.burger-icon, .mobile-menu {
+    display: none;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    .menu {
+        width: calc(100% - 40px); /* Ensure padding does not exceed window */
+        padding: 10px 20px;
+    }
+
+    .menu-content {
+        display: none;
+    }
+
+    .burger-icon {
+        display: block;
+        cursor: pointer;
+    }
+
+    .burger-icon span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: 0.4s;
+    }
+
+    /* Burger icon animation */
+    #toggle-menu:checked + .burger-icon span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    #toggle-menu:checked + .burger-icon span:nth-child(2) {
+        opacity: 0;
+    }
+
+    #toggle-menu:checked + .burger-icon span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+        display: none;
+        background-color: #333333b;
+        border-radius: 0 0 5px 5px;
+        padding: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    #toggle-menu:checked ~ .mobile-menu {
+        display: flex;
+    }
+
+    .mobile-menu a {
+        color: white;
+        padding: 10px;
+        margin: 5px;
+        text-align: center;
+        width: 45%;
+        box-sizing: border-box;
+        border-radius: 3px; /* Optional: Slight rounding on hover background */
+    }
+
+    .mobile-menu a:hover {
+        background-color: #555;
+        border-radius: 5px;
+    }
+
+    .mobile-menu a i {
+        font-size: 20px;
+    }
+}

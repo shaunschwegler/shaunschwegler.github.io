@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Media Gallery</title>
+    <!-- Include main CSS file -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Include menu CSS file -->
+    <link rel="stylesheet" href="css/menu.css">
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- For mobile responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <!-- Navigation Menu -->
+    <nav class="menu">
+        <input type="checkbox" id="toggle-menu">
+        <label for="toggle-menu" class="burger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <div class="menu-content">
+            <div class="menu-left">
+                <a href="index.htm">Shaun Schwegler</a>
+                <a href="mailto:shaunschwegler@gmail.com">📨 Email</a>
+                <a href="tel:+447514867903">📱 Call me!</a>
+                <a href="blog.htm">✍ Blog</a>
+            </div>
+            <div class="menu-right">
+                <a href="https://www.linkedin.com/in/shaunschwegler/" class="icon-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/shaunschwegler" class="icon-link"><i class="fab fa-github"></i></a>
+                <a href="https://www.goodreads.com/review/list/163842607-shaun-schwegler?print=true&shelf=currently-reading&sort=title" class="icon-link"><i class="fas fa-book"></i></a>
+                <a href="https://open.spotify.com/playlist/3wAxFw8lNvZ9VJTmwwNXfv" class="icon-link"><i class="fab fa-spotify"></i></a>
+                <a href="https://soundcloud.com/prim0rdial_uk" class="icon-link"><i class="fab fa-soundcloud"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content for Media Gallery -->
+    <div class="main-content">
+        <h1>Flying Lessons Photodump</h1>
+        <div class="photo-gallery">
+            <!-- Photo Items -->
+            <div class="photo-item">
+                <a href="#" data-modal-target="#photo1-modal">
+                    <img src="img/flying1.jpg" alt="Photo 1">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="#" data-modal-target="#photo2-modal">
+                    <img src="img/flying2.jpg" alt="Photo 2">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="#" data-modal-target="#photo3-modal">
+                    <img src="img/flying3.jpg" alt="Photo 3">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="#" data-modal-target="#photo4-modal">
+                    <img src="img/flying4.jpg" alt="Photo 4">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="#" data-modal-target="#photo5-modal">
+                    <img src="img/flying5.jpg" alt="Photo 5">
+                </a>
+            </div>
+            <div class="photo-item">
+                <a href="#" data-modal-target="#photo5-modal">
+                    <img src="img/flying6.jpg" alt="Photo 6">
+                </a>
+            </div>
+
+            <!-- Video Item -->
+            <div class="photo-item">
+                <a href="#" data-modal-target="#video1-modal">
+                    <img src="img/flyingvidthumb.png" alt="Vid!">
+                </a>
+            </div>
+        </div>
+
+        <!-- Modals for Enlarged Photos -->
+        <div id="photo1-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <img src="img/flying1.jpg" alt="Photo 1" class="modal-image">
+            </div>
+        </div>
+        <div id="photo2-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <img src="img/flying2.jpg" alt="Photo 2" class="modal-image">
+            </div>
+        </div>
+        <div id="photo3-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <img src="img/flying3.jpg" alt="Photo 3" class="modal-image">
+            </div>
+        </div>
+        <div id="photo4-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <img src="img/flying4.jpg" alt="Photo 4" class="modal-image">
+            </div>
+        </div>
+        <div id="photo5-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <img src="img/flying5.jpg" alt="Photo 5" class="modal-image">
+            </div>
+        </div>
+        <div id="photo5-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <img src="img/flying6.jpg" alt="Photo 5" class="modal-image">
+            </div>
+        </div>
+
+        <!-- Modal for Video -->
+        <div id="video1-modal" class="modal" role="dialog" aria-modal="true">
+            <div class="modal-content">
+                <span class="close-button" aria-label="Close Modal">&times;</span>
+                <video controls class="modal-video">
+                    <source src="img/flyingvid.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="width: 100%; background-color: #f8f9fa; padding: 10px; text-align: right; margin-top: 20px;">
+        I've uploaded this resume to <a href="https://github.com/shaunschwegler/shaunschwegler.github.io" target="_blank" rel="noopener noreferrer">GitHub</a>.
+    </footer>
+
+    <!-- Include JavaScript File -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
