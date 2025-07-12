@@ -57,7 +57,7 @@
     <label>Depth (mm): <input id="depth" type="number" value="5" min="2" max="8"></label>
     <label>Image: <input id="texture" type="file" accept="image/*"></label>
     <div class="checkbox-container">
-      <input id="preserveAspect" type="checkbox" checked>
+      <input id="preserveAspect" type="checkbox">
       <label for="preserveAspect">Preserve Image Aspect Ratio</label>
     </div>
     <label>Image Scale: <input id="imgScale" type="number" step="0.1" value="1"></label>
@@ -109,7 +109,7 @@
     const wallGeometry = new THREE.PlaneGeometry(2000, wallHeight);
     const wallTexture = textureLoader.load('dependencies/wall_texture.png');
     wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping;
-    wallTexture.repeat.set(6, 3);
+    wallTexture.repeat.set(2, 1.5);
     const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
     const wall = new THREE.Mesh(wallGeometry, wallMaterial);
     wall.position.z = -200;
@@ -149,7 +149,7 @@
 
       const buildMesh = (materials) => {
         signMesh = new THREE.Mesh(geometry, materials);
-        signMesh.position.set(0, height / 2, -200 + depth / 2 + 0.1);
+        signMesh.position.set(0, height / 2 + 200, -200 + depth / 2 + 0.1);
         scene.add(signMesh);
         camera.position.copy(camPos);
         controls.target.copy(camTarget);
