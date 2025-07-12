@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Three.js Sign Builder</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    #controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 250px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: sans-serif;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.9em;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="sceneCanvas"></canvas>
+  <div id="controls">
+    <label>Width (mm): <input id="width" type="number" value="1250"></label>
+    <label>Height (mm): <input id="height" type="number" value="300"></label>
+    <label>Depth (mm): <input id="depth" type="number" value="5" min="2" max="8"></label>
+    <label>Image: <input id="texture" type="file" accept="image/*"></label>
+    <div class="checkbox-container">
+      <input id="preserveAspect" type="checkbox" checked>
+      <label for="preserveAspect">Preserve Image Aspect Ratio</label>
+    </div>
+    <label>Image Scale: <input id="imgScale" type="number" step="0.1" value="1"></label>
+    <label>X Offset: <input id="imgOffsetX" type="number" step="0.1" value="0"></label>
+    <label>Y Offset: <input id="imgOffsetY" type="number" step="0.1" value="0"></label>
+  </div>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./dependencies/node_modules/three/build/three.module.js",
+        "three/addons/": "./dependencies/node_modules/three/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const canvas = document.getElementById('sceneCanvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xdddddd);
+
+    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 5000);
+    camera.position.set(0, 200, 800);
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.update();
+
+    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    dirLight.position.set(0, 1, 1);
+    scene.add(dirLight);
+
+    const textureLoader = new THREE.TextureLoader();
+
+    const floorGeometry = new THREE.PlaneGeometry(2000, 1333);
+    const floorTexture = textureLoader.load('dependencies/floor_texture.png');
+    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+    floorTexture.repeat.set(6, 4);
+    const floorMaterial = new THREE.MeshStandardMaterial({ map: floorTexture });
+    const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -150;
+    scene.add(floor);
+
+    const wallHeight = 667 * 1.6667;
+    const wallGeometry = new THREE.PlaneGeometry(2000, wallHeight);
+    const wallTexture = textureLoader.load('dependencies/wall_texture.png');
+    wallTexture.wrapS = wallTexture.wrapT = THREE.RepeatWrapping;
+    wallTexture.repeat.set(6, 3);
+    const wallMaterial = new THREE.MeshStandardMaterial({ map: wallTexture });
+    const wall = new THREE.Mesh(wallGeometry, wallMaterial);
+    wall.position.z = -200;
+    wall.position.y = wallHeight / 2 - 150;
+    scene.add(wall);
+
+    let signMesh;
+    let currentTextureFile = null;
+    let loadedImage = null;
+
+    function disposeMaterial(material) {
+      if (Array.isArray(material)) material.forEach(m => m.dispose());
+      else material.dispose();
+    }
+
+    function createSign() {
+      const width = parseFloat(document.getElementById('width').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const depth = parseFloat(document.getElementById('depth').value);
+      const preserveAspect = document.getElementById('preserveAspect').checked;
+      const textureInput = document.getElementById('texture');
+      const scale = parseFloat(document.getElementById('imgScale').value);
+      const offsetX = parseFloat(document.getElementById('imgOffsetX').value);
+      const offsetY = parseFloat(document.getElementById('imgOffsetY').value);
+
+      const camPos = camera.position.clone();
+      const camTarget = controls.target.clone();
+
+      if (signMesh) {
+        scene.remove(signMesh);
+        signMesh.geometry.dispose();
+        disposeMaterial(signMesh.material);
+      }
+
+      const geometry = new THREE.BoxGeometry(width, height, depth);
+      const transparentMat = new THREE.MeshStandardMaterial({ color: 0x007bff, transparent: true, opacity: 0.6 });
+
+      const buildMesh = (materials) => {
+        signMesh = new THREE.Mesh(geometry, materials);
+        signMesh.position.set(0, height / 2, -200 + depth / 2 + 0.1);
+        scene.add(signMesh);
+        camera.position.copy(camPos);
+        controls.target.copy(camTarget);
+        controls.update();
+      };
+
+      if (loadedImage) {
+        const tex = new THREE.Texture(loadedImage);
+        tex.needsUpdate = true;
+        tex.wrapS = tex.wrapT = THREE.ClampToEdgeWrapping;
+
+        const imgAspect = loadedImage.width / loadedImage.height;
+        const signAspect = width / height;
+
+        let repeatX = 1, repeatY = 1;
+
+        if (preserveAspect) {
+          if (imgAspect > signAspect) {
+            repeatX = scale;
+            repeatY = scale * (signAspect / imgAspect);
+          } else {
+            repeatY = scale;
+            repeatX = scale * (imgAspect / signAspect);
+          }
+        } else {
+          repeatX = scale;
+          repeatY = scale;
+        }
+
+        tex.repeat.set(repeatX, repeatY);
+        tex.center.set(0.5, 0.5);
+        tex.offset.set(offsetX, offsetY);
+
+        const materials = [
+          transparentMat, transparentMat, transparentMat, transparentMat,
+          new THREE.MeshStandardMaterial({ map: tex }),
+          transparentMat
+        ];
+        buildMesh(materials);
+      } else {
+        buildMesh(transparentMat);
+      }
+    }
+
+    document.querySelectorAll('#controls input').forEach(input => {
+      input.addEventListener('input', () => {
+        if (input.id !== 'texture') createSign();
+      });
+    });
+
+    document.getElementById('texture').addEventListener('change', e => {
+      const file = e.target.files[0];
+      if (!file) return;
+      currentTextureFile = file;
+      const reader = new FileReader();
+      reader.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          loadedImage = img;
+          createSign();
+        };
+        img.src = ev.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    createSign();
+    animate();
+  </script>
+</body>
+
+</html>
